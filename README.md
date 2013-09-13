@@ -1,4 +1,4 @@
-Geocoder as a Service
+Geocoder as a Service [![Build Status](https://travis-ci.org/K-Phoen/gaas.png?branch=master)](https://travis-ci.org/K-Phoen/gaas)
 =====================
 
 The power of [Geocoder](http://geocoder-php.org/Geocoder/) exposed in an API.
