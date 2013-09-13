@@ -7,6 +7,10 @@
     The power of <a href="http://geocoder-php.org/Geocoder/">Geocoder</a> exposed in an API.
 </p>
 
+<p>
+    <a href="https://travis-ci.org/K-Phoen/gaas"><img src="https://travis-ci.org/K-Phoen/gaas.png?branch=master" alt="Build Status" style="max-width:100%;" /></a>
+</p>
+
 <h2>Usage</h2>
 
 <p>
@@ -73,7 +77,7 @@ structure:
 }
 </code></pre>
 
-<h2>Choosing a provider</h2>
+<h2>Providers</h2>
 
 <p>
     Right now, only the providers not requiring any API key are supported. For
@@ -92,6 +96,77 @@ structure:
     See <a href="http://geocoder-php.org/Geocoder/">the Geocoder documentation</a>
     for a list of available adapters and providers.
 </p>
+
+<h2>Results formatting</h2>
+
+<p>
+    How results are formatted is determined by the "<code>Accept</code>"
+    header's content. We use <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html">content negotiation</a>
+    to choose the best way to format results for a request.
+</p>
+
+<p>
+    Here is a map of the supported "<code>Accept</code>" headers values and
+    their formatting:
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Accept headers</th>
+            <th>Format</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>
+                <code>application/json</code><br />
+                <code>application/x-json</code>
+            </td>
+            <td>JSON</td>
+        </tr>
+        <tr>
+            <td>
+                <code>text/xml</code><br />
+                <code>application/xml</code><br />
+                <code>application/x-xml</code>
+            </td>
+            <td>XML</td>
+        </tr>
+        <tr>
+            <td>
+                <code>application/geo+json</code>
+            </td>
+            <td><a href="http://geojson.org/">GeoJSON</a></td>
+        </tr>
+        <tr>
+            <td>
+                <code>application/gpx+xml</code>
+            </td>
+            <td><a href="http://www.topografix.com/gpx.asp">GPX</a></td>
+        </tr>
+        <tr>
+            <td>
+                <code>application/vnd.google-earth.kml+xml</code><br />
+                <code>application/vnd.google-earth.kmz</code>
+            </td>
+            <td><a href="http://en.wikipedia.org/wiki/Keyhole_Markup_Language">KML</a></td>
+        </tr>
+        <tr>
+            <td>
+                <code>application/octet-stream+wkb</code>
+            </td>
+            <td><a href="http://en.wikipedia.org/wiki/Well-known_text">WKB</a></td>
+        </tr>
+        <tr>
+            <td>
+                <code>text/plain+wkt</code>
+            </td>
+            <td><a href="http://en.wikipedia.org/wiki/Well-known_text">WKT</a></td>
+        </tr>
+    </tbody>
+</table>
 
 <h2>Licence</h2>
 
