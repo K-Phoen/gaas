@@ -1,0 +1,182 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+<div class="banner">
+    <h1>Random Stuff Generator</h1>
+    <h4>Like Lorem Ipsum, but for stuff.</h4>
+
+    <div class="preview">
+        <div class="avatar">
+            <img id="avatar" />
+        </div>
+
+        <div class="info">
+            <h3>Hi, my name is <span class="user_first_name">John</span> <span class="user_last_name">Smith</span><img id="refresh" class="refresh" src="img/refresh.png" width="18px"></h3>
+            <p>I am a randomly generated user. Want to use me as a placeholder in your web application? Copy the the URL below.
+            <pre id="user_url">/lala</pre>
+            <a id="toggle" href="javascript: void(0);">View my full profile</a></p>
+
+            <div id="hidden">
+                <p>
+                    Name: <span class="user_first_name">John</span> <span class="user_last_name">Smith</span><br />
+                    Email: <span class="user_email">johnsmith27@gmail.com</span><br />
+                    Birthdate: <span class="user_birthdate">1991-06-21</span><br />
+                    Address: <span class="user_street">Avenue des Champs-Élysées</span>, <span class="user_zip">75008</span> <span class="user_city">Paris</span><br />
+                    Profile Photo URL: <span class="gen_profile_url">URL</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="body frame">
+    <h2>What is RandomStuff?</h2>
+    <p>
+        RandomStuff is an API that provides you with randomly generated
+        entities. These entities can be used as placeholders in web mockups,
+        and will save you time from creating your own placeholder information.
+    </p>
+
+    <h2>What can it generate?</h2>
+    <p>
+        Currently, RandomStuff is able to generate random data for the following entities:
+        <ul>
+            <li>Users ;</li>
+            <li>Locations ;</li>
+            <li>Events.</li>
+        </ul>
+    </p>
+
+    <h2>How to use</h2>
+    <p>
+        You can use AJAX or another method to ask RandomStuff for a randomly
+        generated entity. If you are using JQuery, you can paste this code in
+        your body to get started.
+    </p>
+    <pre>
+$.ajax({
+    url: <span>'/lala'</span>,
+    dataType: <span>'json'</span>,
+    success: function(<span>data</span>){
+        console.log(<span>data.results</span>);
+    }
+});
+    </pre>
+
+    <h2>Results</h2>
+    <p>
+        The application will provide you with a JSON object that you can
+        parse and use in your application.
+    </p>
+
+    <h3>User</h3>
+    <pre>
+{
+    results: {
+        name: {
+            first: "<span class='user_first_name'>sofia</span>",
+            last: "<span class='user_last_name'>morgan</span>"
+        },
+        location: {
+            street: "<span class='user_street'>7159 edwards rd</span>",
+            city: "<span class='user_city'>seymour</span>",
+            state: "<span class='user_state'>pennsylvania</span>",
+            zip: "<span class='user_zip'>37284</span>"
+        },
+        picture: "<span class='user_picture'>1994-01-05</span>",
+        picture_thumb: "<span class='user_picture_thumb'>sofia.morgan91@example.com</span>",
+        birthday: "<span class='user_email'>1994-01-05</span>",
+        email: "<span class='user_email'>sofia.morgan91@example.com</span>",
+        password: "<span class='user_password'>738y8c9</span>",
+        md5_hash: "<span class='gen_md5'>15d628391f0eb58d7724041ab9a12ae2</span>",
+        sha1_hash: "<span class='gen_sha'>58be9e2c7f22cd75d7af3c9e175b6465b280d61d</span>",
+        phone: "<span class='gen_phone'>(471)-543-4073</span>",
+        seed: <span class='user_seed'>985077871</span>
+    }
+}
+    </pre>
+
+    <h3>Location</h3>
+    <pre>
+{
+    results: {
+        name: "<span class='location_name'>Costa S.A.R.L.</span>",
+        description: "<span class="location_description">Eum ut nemo ipsam veritatis explicabo. Ducimus quam eos voluptatem exercitationem corrupti. Incidunt dolores veniam qui architecto at.</span>",
+        address: {
+            street: "<span class='location_street'>7159 edwards rd</span>",
+            city: "<span class='location_city'>seymour</span>",
+            state: "<span class='location_state'>pennsylvania</span>",
+            country: "<span class='gen_country'>USA</span>",
+            zip: "<span class='location_zip'>37284</span>"
+        },
+        coordinates: {
+            latitude: "<span class='gen_latitude'>17.062857</span>",
+            longitude: "<span class='gen_longitude'>89.005936</span>"
+        },
+        seed: <span class='location_seed'>1653467668</span>
+    }
+}
+    </pre>
+
+    <h3>Event</h3>
+    <pre>
+{
+    results: {
+        title: "<span class='event_title'>Perspiciatis consequuntur nihil at.</span>",
+        description: "<span class="event_description">Eum ut nemo ipsam veritatis explicabo. Ducimus quam eos voluptatem exercitationem corrupti. Incidunt dolores veniam qui architecto at.</span>",
+        start_date: "<span class="event_start_date">2013-08-27 21:05:50</span>",
+        end_date: "<span class="event_end_date">2013-09-08 23:16:28</span>",
+        timezone: "<span class="event_timezone">Asia/Baku</span>",
+        venue: {
+            // the data here is a Location
+        },
+        owner: {
+            // the data here is a User
+        },
+        seed: <span class='event_seed'>1653467668</span>
+    }
+}
+    </pre>
+
+    <h2>Seeds</h2>
+    <p>
+        In order to speed up your application, RandomStuff also allows you to
+        always request the same information each time from the service. This is
+        for both consistency, and it allows your browser to cache profile
+        photos to speed up your loading time. RandomStuff accepts a "<b>seed</b>"
+        parameter that will always return the same results.
+    </p>
+
+    <p>(note that giving a seed disable the values overriding feature)</p>
+
+    <!--
+    <ul class="social">
+        <li><a href="https://twitter.com/randomapi">Follow @randomapi</a></li>
+
+        <li><a href="https://twitter.com/share?text=Awesome! An API that generates random users. &url=http://randomuser.me" target="_blank">Share on Twitter</a></li>
+    </ul>
+    -->
+</div>
+
+<footer>
+    <div class="frame">
+        <h1>Random User Generator</h1>
+
+        <div class="block">
+            <div class="builder">
+                <h3>Designed</h3>
+                <a href="http://twitter.com/arronhunt"><img src="img/creator_arron.png" width="80px" alt="Designed by Arron Hunt" /></a>
+            </div>
+            <div class="builder">
+                <h3>Developed</h3>
+                <a href="http://twitter.com/KPhoen"><img src="http://files.kevingomez.fr/avatar.jpg" width="80px" alt="Developed by Kévin Gomez" /></a>
+            </div>
+        </div>
+
+        <div class="block">
+            <h3>Copyright Notice</h3>
+            <p>All randomly generated photos are copyrighted under a <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/deed.en">Creative Commons BY-NC-SA 2.0</a> license. These photos were hand picked from Greg Peverill-Conti's <a href="http://www.flickr.com/photos/gregpc/">1,000 faces project</a>.</p>
+        </div>
+    </div>
+</footer>
+{% endblock %}
