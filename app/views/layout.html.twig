@@ -2,13 +2,69 @@
 <html lang="en">
 <head>
     <title>Geocoder as a service</title>
-    <meta charset='utf-8' />
+    <meta charset="utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <!--[if !IE]><!-->
+    <link rel="stylesheet" href="/css/responsive-table.css" />
+    <!--<![endif]-->
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
 <body>
-{% block body %}{% endblock %}
+<div class="wrapper">
+    <header>
+        {% block sidebar %}
+        <h1>
+            <a href="/"><img src="/images/geocoder.png" class="logo" /></a>
+        </h1>
+        <p>Geocoder as a Service</p>
+
+        <p class="view">
+            <a href="https://github.com/geocoder-php/GeocoderServiceProvider">
+                View the Project on GitHub <small>geocoder-php/GeocoderServiceProvider</small>
+            </a>
+        </p>
+
+        <ul>
+            <li>
+                <a href="https://github.com/geocoder-php/GeocoderServiceProvider/zipball/master">
+                    Download <strong>ZIP File</strong>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/geocoder-php/GeocoderServiceProvider/tarball/master">
+                    Download <strong>TAR Ball</strong>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/geocoder-php/GeocoderServiceProvider">
+                    View On <strong>GitHub</strong>
+                </a>
+            </li>
+        </ul>
+        {% endblock %}
+    </header>
+
+    <section>
+        {% block body %}{% endblock %}
+    </section>
+
+
+    <footer>
+        <p>
+            This project is maintained by <a href="https://github.com/K-Phoen">Kévin Gomez</a> and
+            <a href="https://github.com/geocoder-php/GeocoderServiceProvider/contributors">
+                awesome people
+            </a>.
+        </p>
+        <p>
+            <small>Theme by <a href="https://github.com/orderedlist">orderedlist</a></small>
+        </p>
+    </footer>
+</div>
 </body>
 </html>
