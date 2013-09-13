@@ -12,4 +12,4 @@ EOT
             );
 }
 
-$loader->add('RandomStuff', __DIR__);
+$loader->add('Geocoder', __DIR__);
