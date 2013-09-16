@@ -43,4 +43,59 @@ class ApiTest extends WebTestCase
             array( array('latitude' => 48.8552897, 'longitude' => 2.3433325) ),
         );
     }
+
+    /**
+     * @dataProvider validAcceptHeadersProvider
+     */
+    public function testValidAcceptHeaders($header, $expectedContentType)
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/api/location?ip=128.0.0.1',
+            $parameters = array(),
+            $files = array(),
+            $server = array('HTTP_ACCEPT' => $header)
+        );
+
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertSame($expectedContentType, $client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function validAcceptHeadersProvider()
+    {
+        return array(
+            array('application/json',       'application/json'),
+            array('text/xml',               'text/xml; charset=UTF-8'),
+            array('application/xml',        'text/xml; charset=UTF-8'),
+
+            array('application/geo+json',                   'application/geo+json'),
+            array('application/gpx+xml',                    'application/gpx+xml'),
+            array('application/vnd.google-earth.kml+xml',   'application/vnd.google-earth.kml+xml'),
+            array('application/vnd.google-earth.kmz',       'application/vnd.google-earth.kml+xml'),
+            array('application/octet-stream+wkb',           'application/octet-stream+wkb'),
+            array('text/plain+wkt',                         'text/plain+wkt; charset=UTF-8'),
+        );
+    }
+
+    /**
+     * @dataProvider invalidAcceptHeadersProvider
+     */
+    public function testInvalidAcceptHeaders($header)
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/api/location?ip=128.0.0.1',
+            $parameters = array(),
+            $files = array(),
+            $server = array('HTTP_ACCEPT' => $header)
+        );
+
+        $this->assertEquals(406, $client->getResponse()->getStatusCode());
+    }
+
+    public function invalidAcceptHeadersProvider()
+    {
+        return array(
+            array('text/html'),
+            array('application/foo'),
+        );
+    }
 }
