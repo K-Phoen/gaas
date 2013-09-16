@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5d84aa8b5fc1d684789b0df158e59241",
+    "hash": "265654a1c54e82cd4a04af85788584cc",
     "packages": [
         {
             "name": "geocoder-php/geocoder-service-provider",
@@ -643,16 +643,16 @@
         },
         {
             "name": "willdurand/geocoder",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/geocoder-php/Geocoder.git",
-                "reference": "39722583edd5611c9bab1f7d0fe9a75f7abf0441"
+                "reference": "5c3a0d43bdf44d9846e92f2258652616ee0fc67b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/Geocoder/zipball/39722583edd5611c9bab1f7d0fe9a75f7abf0441",
-                "reference": "39722583edd5611c9bab1f7d0fe9a75f7abf0441",
+                "url": "https://api.github.com/repos/geocoder-php/Geocoder/zipball/5c3a0d43bdf44d9846e92f2258652616ee0fc67b",
+                "reference": "5c3a0d43bdf44d9846e92f2258652616ee0fc67b",
                 "shasum": ""
             },
             "require": {
@@ -675,7 +675,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -702,7 +702,7 @@
                 "geocoding",
                 "geoip"
             ],
-            "time": "2013-08-27 11:38:53"
+            "time": "2013-09-16 08:29:30"
         },
         {
             "name": "willdurand/negotiation",
@@ -756,6 +756,90 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "fzaninotto/faker",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "4ad4bc4b5c8d3c0f3cf55d2fedc2f65b313ec62f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/4ad4bc4b5c8d3c0f3cf55d2fedc2f65b313ec62f",
+                "reference": "4ad4bc4b5c8d3c0f3cf55d2fedc2f65b313ec62f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Faker": "src/",
+                    "Faker\\PHPUnit": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2013-06-09 18:05:57"
+        },
+        {
+            "name": "kphoen/faker-service-provider",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/K-Phoen/FakerServiceProvider.git",
+                "reference": "288a41f86787707e75587f00b1a093ce2faf6fed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/K-Phoen/FakerServiceProvider/zipball/288a41f86787707e75587f00b1a093ce2faf6fed",
+                "reference": "288a41f86787707e75587f00b1a093ce2faf6fed",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "KPhoen": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Gomez",
+                    "email": "contact@kevingomez.fr",
+                    "homepage": "http://www.kevingomez.fr/"
+                }
+            ],
+            "description": "Faker Service Provider for Silex",
+            "time": "2013-09-12 11:51:55"
+        },
         {
             "name": "phpunit/php-code-coverage",
             "version": "1.2.13",
@@ -1002,16 +1086,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "3.7.26",
+            "version": "3.7.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "551d18555488f385aea9dfb33f2ba3fe6f3050f8"
+                "reference": "4b024e753e3421837afbcca962c8724c58b39376"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/551d18555488f385aea9dfb33f2ba3fe6f3050f8",
-                "reference": "551d18555488f385aea9dfb33f2ba3fe6f3050f8",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4b024e753e3421837afbcca962c8724c58b39376",
+                "reference": "4b024e753e3421837afbcca962c8724c58b39376",
                 "shasum": ""
             },
             "require": {
@@ -1072,7 +1156,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-09-13 05:00:10"
+            "time": "2013-09-16 03:09:52"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
