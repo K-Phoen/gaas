@@ -45,7 +45,7 @@ class ApiTest extends WebTestCase
     }
 
     /**
-     * @dataProvider validAcceptHeadersProvider
+     * @dataProvider allAcceptHeadersProvider
      */
     public function testValidAcceptHeaders($header, $expectedContentType)
     {
@@ -60,13 +60,34 @@ class ApiTest extends WebTestCase
         $this->assertSame($expectedContentType, $client->getResponse()->headers->get('Content-Type'));
     }
 
-    public function validAcceptHeadersProvider()
+    /**
+     * @dataProvider classicAcceptHeadersProvider
+     */
+    public function testExceptionsAreSerialized($header, $expectedContentType)
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/api/locations',
+            $parameters = array(),
+            $files = array(),
+            $server = array('HTTP_ACCEPT' => $header)
+        );
+
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+        $this->assertSame($expectedContentType, $client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function classicAcceptHeadersProvider()
     {
         return array(
             array('application/json',       'application/json'),
             array('text/xml',               'text/xml; charset=UTF-8'),
             array('application/xml',        'text/xml; charset=UTF-8'),
+        );
+    }
 
+    public function dumpersAcceptHeadersProvider()
+    {
+        return array(
             array('application/geo+json',                   'application/geo+json'),
             array('application/gpx+xml',                    'application/gpx+xml'),
             array('application/vnd.google-earth.kml+xml',   'application/vnd.google-earth.kml+xml'),
@@ -74,6 +95,11 @@ class ApiTest extends WebTestCase
             array('application/octet-stream+wkb',           'application/octet-stream+wkb'),
             array('text/plain+wkt',                         'text/plain+wkt; charset=UTF-8'),
         );
+    }
+
+    public function allAcceptHeadersProvider()
+    {
+        return array_merge($this->classicAcceptHeadersProvider(), $this->dumpersAcceptHeadersProvider());
     }
 
     /**

@@ -26,6 +26,10 @@ $app['response.listener'] = $app->share(function($app) {
     return new \Geocoder\EventListener\ResponseListener($app['serializer'], $app['geocoder.dumpers']);
 });
 
+$app['exception.listener'] = $app->share(function($app) {
+    return new \Geocoder\EventListener\ExceptionListener($app['serializer']);
+});
+
 $app['geocoder'] = $app->share(function($app) {
     $geocoder = new \Geocoder\Geocoder();
 

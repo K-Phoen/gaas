@@ -2,6 +2,7 @@
 
 namespace Geocoder\Controller;
 
+use Geocoder\Exception\ApiException;
 use Geocoder\Request\Handler\GeocoderRequestHandler;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
@@ -25,6 +26,7 @@ class ApiController implements ControllerProviderInterface
 
         // will automagically generate a response from the data returned by
         // the controllers
+        $app->on(KernelEvents::EXCEPTION, array($app['exception.listener'], 'onException'));
         $app->on(KernelEvents::VIEW, array($app['response.listener'], 'onResponse'));
 
         return $controllers;
@@ -34,7 +36,9 @@ class ApiController implements ControllerProviderInterface
     {
         $handler = new GeocoderRequestHandler($app['geocoder']);
         if (!$handler->handle($request)) {
-            return new Response('Invalid request', 400);
+            throw new ApiException(array(
+                'message' => 'Invalid request',
+            ), 400);
         }
 
         // and send the result
