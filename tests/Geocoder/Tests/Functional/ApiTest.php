@@ -10,7 +10,7 @@ class ApiTest extends WebTestCase
     public function testInvalidQuery(array $parameters)
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/api/location', $parameters);
+        $crawler = $client->request('GET', '/api/locations', $parameters);
 
         $this->assertSame(400, $client->getResponse()->getStatusCode());
     }
@@ -30,7 +30,7 @@ class ApiTest extends WebTestCase
     public function testValidQuery(array $parameters)
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/api/location', $parameters);
+        $crawler = $client->request('GET', '/api/locations', $parameters);
 
         $this->assertTrue($client->getResponse()->isSuccessful());
     }
@@ -50,7 +50,7 @@ class ApiTest extends WebTestCase
     public function testValidAcceptHeaders($header, $expectedContentType)
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/api/location?ip=128.0.0.1',
+        $crawler = $client->request('GET', '/api/locations?ip=128.0.0.1',
             $parameters = array(),
             $files = array(),
             $server = array('HTTP_ACCEPT' => $header)
@@ -82,7 +82,7 @@ class ApiTest extends WebTestCase
     public function testInvalidAcceptHeaders($header)
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/api/location?ip=128.0.0.1',
+        $crawler = $client->request('GET', '/api/locations?ip=128.0.0.1',
             $parameters = array(),
             $files = array(),
             $server = array('HTTP_ACCEPT' => $header)

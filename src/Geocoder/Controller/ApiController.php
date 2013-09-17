@@ -19,7 +19,7 @@ class ApiController implements ControllerProviderInterface
         $controllers = $app['controllers_factory'];
 
         $controllers
-            ->get('/location', array($this, 'getLocation'))
+            ->get('/locations', array($this, 'getLocation'))
             ->bind('api_location')
             ->before(array($app['format.listener'], 'onRequest'));
 
