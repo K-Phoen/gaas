@@ -41,7 +41,13 @@ class GeocoderRequestHandler
 
     public function getProvider()
     {
-        return $this->provider;
+        if ($this->provider !== 'chain') {
+            return $this->provider;
+        }
+
+        // retrieve the real provider used by the ChainProvider
+        $providers = $this->geocoder->getProviders();
+        return $providers[$this->provider]->getLastUsedProvider()->getName();
     }
 
     public function getResult()

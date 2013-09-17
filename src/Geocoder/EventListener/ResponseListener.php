@@ -19,22 +19,24 @@ class ResponseListener
 
     public function onResponse(GetResponseForControllerResultEvent $event)
     {
-        if (!$event->getControllerResult() instanceof GeocodedResultInterface) {
+        $data = $event->getControllerResult();
+
+        if (!is_array($data) || empty($data['result']) || !$data['result'] instanceof GeocodedResultInterface) {
             return;
         }
 
-        $response = $this->format($event->getRequest(), $event->getControllerResult());
+        $response = $this->format($event->getRequest(), $data);
         $event->setResponse($response);
     }
 
-    protected function format(Request $request, GeocodedResultInterface $result)
+    protected function format(Request $request, array $data)
     {
-        $format = $request->getRequestFormat(null);
+        $format = $request->getRequestFormat();
 
         if ($this->useGeocoderDumper($format)) {
-            $content = $this->formatWithDumper($result, $format);
+            $content = $this->formatWithDumper($data['result'], $format);
         } else {
-            $content = $this->formatWithSerializer($result, $format);
+            $content = $this->formatWithSerializer($data, $format);
         }
 
         return new Response($content, 200, array(
@@ -47,9 +49,11 @@ class ResponseListener
         return $this->dumpers[$format]->dump($result);
     }
 
-    protected function formatWithSerializer(GeocodedResultInterface $result, $format)
+    protected function formatWithSerializer(array $data, $format)
     {
-        return $this->serializer->serialize($result->toArray(), $format);
+        return $this->serializer->serialize(array_merge($data, array(
+            'result' => $data['result']->toArray(),
+        )), $format);
     }
 
     protected function useGeocoderDumper($format)

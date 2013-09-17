@@ -35,6 +35,7 @@ class ApiController implements ControllerProviderInterface
     public function getLocation(Request $request, Application $app)
     {
         $handler = new GeocoderRequestHandler($app['geocoder']);
+
         if (!$handler->handle($request)) {
             throw new ApiException(array(
                 'message' => 'Invalid request',
@@ -42,6 +43,9 @@ class ApiController implements ControllerProviderInterface
         }
 
         // and send the result
-        return $handler->getResult();
+        return array(
+            'result'    => $handler->getResult(),
+            'provider'  => $handler->getProvider(),
+        );
     }
 }

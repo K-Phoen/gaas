@@ -53,27 +53,29 @@ By default, the location data returned by the API respects the following
 structure:
 
 <pre><code>{
-    "latitude": 48.8552897,
-    "longitude": 2.3433325,
-    "bounds": {
-        "south": 48.8552897,
-        "west": 2.3433325,
-        "north": 48.8552897,
-        "east": 2.3433325
+    "result": {
+        "latitude": 48.8552897,
+        "longitude": 2.3433325,
+        "bounds": {
+            "south": 48.8552897,
+            "west": 2.3433325,
+            "north": 48.8552897,
+            "east": 2.3433325
+        },
+        "streetNumber": "36",
+        "streetName": "Quai Des Orfèvres",
+        "zipcode": "75001",
+        "city": "Paris",
+        "cityDistrict": "1St Arrondissement Of Paris",
+        "county": "Paris",
+        "countyCode": "75",
+        "region": "Île-De-France",
+        "regionCode": "IDF",
+        "country": "France",
+        "countryCode": "FR",
+        "timezone": null
     },
-    "streetNumber": "36",
-    "streetName": "Quai Des Orfèvres",
-    "zipcode": "75001",
-    "city": "Paris",
-    "cityDistrict": "1St Arrondissement Of Paris",
-    "county": "Paris",
-    "countyCode": "75",
-    "region": "Île-De-France",
-    "regionCode": "IDF",
-    "country": "France",
-    "countryCode": "FR",
-    "timezone": null
-
+    "provider": "google_maps"
 }
 </code></pre>
 

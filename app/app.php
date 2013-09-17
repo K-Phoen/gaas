@@ -47,7 +47,7 @@ $app['geocoder'] = $app->share(function($app) {
     $geocoder->registerProvider(new \Geocoder\Provider\ArcGISOnlineProvider($app['geocoder.adapter']));
     $geocoder->registerProvider(new \Geocoder\Provider\DataScienceToolkitProvider($app['geocoder.adapter']));
 
-    $geocoder->registerProvider(new \Geocoder\Provider\ChainProvider($geocoder->getProviders()));
+    $geocoder->registerProvider(new \Geocoder\Provider\CustomChainProvider($geocoder->getProviders()));
 
     return $geocoder;
 });

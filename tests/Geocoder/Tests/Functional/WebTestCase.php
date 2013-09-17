@@ -27,7 +27,7 @@ abstract class WebTestCase extends BaseWebTestCase
 
             $geocoder->registerProvider(new \Geocoder\Tests\Provider\FakerProvider($app['faker']));
 
-            $geocoder->registerProvider(new \Geocoder\Provider\ChainProvider($geocoder->getProviders()));
+            $geocoder->registerProvider(new \Geocoder\Provider\CustomChainProvider($geocoder->getProviders()));
 
             return $geocoder;
         });
