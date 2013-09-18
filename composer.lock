@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/geocoder-php/GeocoderServiceProvider.git",
-                "reference": "773a8fc70790fd02f59d480ee437f64f5218a5bd"
+                "reference": "2564896bd5efd1dc4657c781a1aceae3bb3e956a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/GeocoderServiceProvider/zipball/773a8fc70790fd02f59d480ee437f64f5218a5bd",
-                "reference": "773a8fc70790fd02f59d480ee437f64f5218a5bd",
+                "url": "https://api.github.com/repos/geocoder-php/GeocoderServiceProvider/zipball/2564896bd5efd1dc4657c781a1aceae3bb3e956a",
+                "reference": "2564896bd5efd1dc4657c781a1aceae3bb3e956a",
                 "shasum": ""
             },
             "require": {
@@ -24,7 +24,8 @@
             },
             "require-dev": {
                 "phpunit/phpunit": ">=3.7.0",
-                "silex/silex": "~1.0@dev"
+                "silex/silex": "~1.0@dev",
+                "symfony/twig-bridge": "~2.2"
             },
             "type": "library",
             "autoload": {
@@ -50,7 +51,7 @@
                 "service",
                 "silex"
             ],
-            "time": "2013-09-13 16:00:26"
+            "time": "2013-09-18 19:49:10"
         },
         {
             "name": "kphoen/negotiation-service-provider",

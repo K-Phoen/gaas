@@ -77,27 +77,18 @@ $app['geocoder.providers.factory'] = $app->share(function($app) {
 // known providers
 
 // we override geocoder's definition because we don't want to add providers yet
-$app['geocoder'] = $app->share(function($app) {
-    return new \Geocoder\Geocoder();
+if (isset($app['profiler'])) {
+    $app['geocoder'] = $app->share(function($app) {
+        $geocoder = new \Geocoder\LoggableGeocoder();
+        $geocoder->setLogger($app['geocoder.logger']);
 
-    $geocoder->registerProvider(new \Geocoder\Provider\FreeGeoIpProvider($app['geocoder.adapter']));
-    $geocoder->registerProvider(new \Geocoder\Provider\HostIpProvider($app['geocoder.adapter']));
-    $geocoder->registerProvider(new \Geocoder\Provider\GeoPluginProvider($app['geocoder.adapter']));
-    $geocoder->registerProvider(new \Geocoder\Provider\IpGeoBaseProvider($app['geocoder.adapter']));
-
-    $geocoder->registerProvider(new \Geocoder\Provider\OIORestProvider($app['geocoder.adapter']));
-    $geocoder->registerProvider(new \Geocoder\Provider\GeocoderCaProvider($app['geocoder.adapter']));
-    $geocoder->registerProvider(new \Geocoder\Provider\GeocoderUsProvider($app['geocoder.adapter']));
-    $geocoder->registerProvider(new \Geocoder\Provider\GoogleMapsProvider($app['geocoder.adapter']));
-    $geocoder->registerProvider(new \Geocoder\Provider\OpenStreetMapsProvider($app['geocoder.adapter']));
-    $geocoder->registerProvider(new \Geocoder\Provider\MapQuestProvider($app['geocoder.adapter']));
-    $geocoder->registerProvider(new \Geocoder\Provider\ArcGISOnlineProvider($app['geocoder.adapter']));
-    $geocoder->registerProvider(new \Geocoder\Provider\DataScienceToolkitProvider($app['geocoder.adapter']));
-
-    $geocoder->registerProvider(new \Geocoder\Provider\CustomChainProvider($geocoder->getProviders()));
-
-    return $geocoder;
-});
+        return $geocoder;
+    });
+} else {
+    $app['geocoder'] = $app->share(function($app) {
+        return new \Geocoder\Geocoder();
+    });
+}
 
 
 return $app;
