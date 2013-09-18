@@ -33,6 +33,7 @@ class ApiTest extends WebTestCase
         $crawler = $client->request('GET', '/api/locations', $parameters);
 
         $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertSame('faker', $client->getResponse()->headers->get('X-Provider'));
     }
 
     public function validParametersProvider()
@@ -50,7 +51,7 @@ class ApiTest extends WebTestCase
     public function testValidAcceptHeaders($header, $expectedContentType)
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/api/locations?ip=128.0.0.1',
+        $crawler = $client->request('GET', '/api/locations?ip=127.0.0.1',
             $parameters = array(),
             $files = array(),
             $server = array('HTTP_ACCEPT' => $header)
@@ -58,6 +59,7 @@ class ApiTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isSuccessful());
         $this->assertSame($expectedContentType, $client->getResponse()->headers->get('Content-Type'));
+        $this->assertSame('faker', $client->getResponse()->headers->get('X-Provider'));
     }
 
     /**
@@ -108,7 +110,7 @@ class ApiTest extends WebTestCase
     public function testInvalidAcceptHeaders($header)
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/api/locations?ip=128.0.0.1',
+        $crawler = $client->request('GET', '/api/locations?ip=127.0.0.1',
             $parameters = array(),
             $files = array(),
             $server = array('HTTP_ACCEPT' => $header)
@@ -123,5 +125,40 @@ class ApiTest extends WebTestCase
             array('text/html'),
             array('application/foo'),
         );
+    }
+
+    /**
+     * @dataProvider validProvidersProvider
+     */
+    public function testProviderCanBeSpecified($provider, $expectedProvider)
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/api/locations', array(
+            'ip'        => '127.0.0.1',
+            'provider'  => $provider
+        ));
+
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertSame($expectedProvider, $client->getResponse()->headers->get('X-Provider'));
+    }
+
+    public function validProvidersProvider()
+    {
+        return array(
+            array('',           'faker'),
+            array('faker',      'faker'),
+            array('other_faker', 'other_faker'),
+        );
+    }
+
+    public function testInvalidProviderReturnsAnError()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/api/locations', array(
+            'ip'        => '127.0.0.1',
+            'provider'  => 'invalid_provider'
+        ));
+
+        $this->assertEquals(406, $client->getResponse()->getStatusCode());
     }
 }

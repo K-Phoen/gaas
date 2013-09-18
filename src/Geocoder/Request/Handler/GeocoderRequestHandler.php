@@ -17,8 +17,6 @@ class GeocoderRequestHandler
 
     public function handle(Request $request)
     {
-        $this->geocoder->using($request->attributes->get('_provider'));
-
         // limit the results
         if (($limit = $request->query->get('limit')) && (int) $limit > 0) {
             $this->geocoder->limit((int) $limit);

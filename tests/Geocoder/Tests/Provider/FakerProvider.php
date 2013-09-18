@@ -45,5 +45,6 @@ class FakerProvider extends AbstractProvider implements ProviderInterface
 
     public function setMaxResults($limit)
     {
+        return $this;
     }
 }

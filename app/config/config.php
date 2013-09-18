@@ -19,13 +19,20 @@ $app->register(new KPhoen\Provider\NegotiationServiceProvider(array(
 )));
 
 // Debug?
-$app['debug'] = 'dev' === getenv('APPLICATION_ENV') || (!empty($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] === '10.0.2.2');
+$app['env'] = !empty(getenv('APPLICATION_ENV')) ? getenv('APPLICATION_ENV') : 'dev';
+$app['debug'] = 'prod' !== $app['env'] ;
 
 if ($app['debug']) {
     $app->register(new Silex\Provider\WebProfilerServiceProvider(), array(
         'profiler.cache_dir'    => __DIR__.'/../cache/profiler',
         'profiler.mount_prefix' => '/_profiler', // this is the default
     ));
+}
+
+// load services
+$app = require __DIR__.'/services.php';
+if (file_exists($servicesFile = sprintf(__DIR__.'/services_%s.php', $app['env']))) {
+    $app = require $servicesFile;
 }
 
 return $app;

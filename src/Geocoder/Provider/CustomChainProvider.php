@@ -2,7 +2,6 @@
 
 namespace Geocoder\Provider;
 
-use Geocoder\Provider\ChainProvider;
 use Geocoder\Provider\ProviderInterface;
 
 use Geocoder\Exception\InvalidCredentialsException;
