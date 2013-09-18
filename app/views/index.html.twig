@@ -74,8 +74,7 @@ structure:
         "country": "France",
         "countryCode": "FR",
         "timezone": null
-    },
-    "provider": "google_maps"
+    }
 }
 </code></pre>
 
@@ -97,6 +96,11 @@ structure:
 <p>
     See <a href="http://geocoder-php.org/Geocoder/">the Geocoder documentation</a>
     for a list of available adapters and providers.
+</p>
+
+<p>
+    <strong>N.B:</strong> The provider used for the query is returned in the
+    <code>X-Provider</code> header.
 </p>
 
 <h2>Results formatting</h2>
