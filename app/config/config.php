@@ -19,7 +19,8 @@ $app->register(new KPhoen\Provider\NegotiationServiceProvider(array(
 )));
 
 // Debug?
-$app['env'] = !empty(getenv('APPLICATION_ENV')) ? getenv('APPLICATION_ENV') : 'dev';
+$env = getenv('APPLICATION_ENV');
+$app['env'] = !empty($env) ? $env : 'dev';
 $app['debug'] = 'prod' !== $app['env'] ;
 
 if ($app['debug']) {

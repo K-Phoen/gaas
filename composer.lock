@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "265654a1c54e82cd4a04af85788584cc",
+    "hash": "744beaad0e9ec1171ca7cbd2fea4d681",
     "packages": [
         {
             "name": "geocoder-php/geocoder-service-provider",
@@ -804,21 +804,25 @@
         },
         {
             "name": "kphoen/faker-service-provider",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/K-Phoen/FakerServiceProvider.git",
-                "reference": "288a41f86787707e75587f00b1a093ce2faf6fed"
+                "reference": "1fcf6833d320c425d829bac56da2f835304c5ef8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/FakerServiceProvider/zipball/288a41f86787707e75587f00b1a093ce2faf6fed",
-                "reference": "288a41f86787707e75587f00b1a093ce2faf6fed",
+                "url": "https://api.github.com/repos/K-Phoen/FakerServiceProvider/zipball/1fcf6833d320c425d829bac56da2f835304c5ef8",
+                "reference": "1fcf6833d320c425d829bac56da2f835304c5ef8",
                 "shasum": ""
             },
             "require": {
                 "fzaninotto/faker": "~1.0",
                 "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=3.7.0",
+                "silex/silex": "~1.0@dev"
             },
             "type": "library",
             "autoload": {
@@ -838,7 +842,7 @@
                 }
             ],
             "description": "Faker Service Provider for Silex",
-            "time": "2013-09-12 11:51:55"
+            "time": "2013-09-18 15:05:40"
         },
         {
             "name": "phpunit/php-code-coverage",
