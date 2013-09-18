@@ -9,7 +9,6 @@ class GeocoderRequestHandler
 {
     protected $geocoder;
     protected $result;
-    protected $provider;
 
     public function __construct(GeocoderInterface $geocoder)
     {
@@ -18,9 +17,7 @@ class GeocoderRequestHandler
 
     public function handle(Request $request)
     {
-        // choose the provider
-        $this->provider = $request->query->get('provider', 'chain');
-        $this->geocoder->using($this->provider);
+        $this->geocoder->using($request->attributes->get('_provider'));
 
         // limit the results
         if (($limit = $request->query->get('limit')) && (int) $limit > 0) {
@@ -37,17 +34,6 @@ class GeocoderRequestHandler
         }
 
         return $this->result !== null;
-    }
-
-    public function getProvider()
-    {
-        if ($this->provider !== 'chain') {
-            return $this->provider;
-        }
-
-        // retrieve the real provider used by the ChainProvider
-        $providers = $this->geocoder->getProviders();
-        return $providers[$this->provider]->getLastUsedProvider()->getName();
     }
 
     public function getResult()

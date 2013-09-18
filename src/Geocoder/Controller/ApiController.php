@@ -4,6 +4,7 @@ namespace Geocoder\Controller;
 
 use Geocoder\Exception\ApiException;
 use Geocoder\Request\Handler\GeocoderRequestHandler;
+use Geocoder\Result\ApiResult;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +29,7 @@ class ApiController implements ControllerProviderInterface
         // the controllers
         $app->on(KernelEvents::EXCEPTION, array($app['exception.listener'], 'onException'));
         $app->on(KernelEvents::VIEW, array($app['response.listener'], 'onResponse'));
+        $app['dispatcher']->addSubscriber($app['provider.subscriber']);
 
         return $controllers;
     }
@@ -43,9 +45,6 @@ class ApiController implements ControllerProviderInterface
         }
 
         // and send the result
-        return array(
-            'result'    => $handler->getResult(),
-            'provider'  => $handler->getProvider(),
-        );
+        return new ApiResult($handler->getResult());
     }
 }

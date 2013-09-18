@@ -30,6 +30,10 @@ $app['exception.listener'] = $app->share(function($app) {
     return new \Geocoder\EventListener\ExceptionListener($app['serializer']);
 });
 
+$app['provider.subscriber'] = $app->share(function($app) {
+    return new \Geocoder\EventListener\ProviderSubscriber($app['geocoder']);
+});
+
 $app['geocoder'] = $app->share(function($app) {
     $geocoder = new \Geocoder\Geocoder();
 

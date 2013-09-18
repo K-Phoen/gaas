@@ -2,6 +2,7 @@
 
 namespace Geocoder\EventListener;
 
+use Geocoder\Result\ApiResult;
 use Geocoder\Result\ResultInterface as GeocodedResultInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,24 +20,24 @@ class ResponseListener
 
     public function onResponse(GetResponseForControllerResultEvent $event)
     {
-        $data = $event->getControllerResult();
+        $result = $event->getControllerResult();
 
-        if (!is_array($data) || empty($data['result']) || !$data['result'] instanceof GeocodedResultInterface) {
+        if (!$result instanceof ApiResult) {
             return;
         }
 
-        $response = $this->format($event->getRequest(), $data);
+        $response = $this->format($event->getRequest(), $result);
         $event->setResponse($response);
     }
 
-    protected function format(Request $request, array $data)
+    protected function format(Request $request, ApiResult $result)
     {
         $format = $request->getRequestFormat();
 
         if ($this->useGeocoderDumper($format)) {
-            $content = $this->formatWithDumper($data['result'], $format);
+            $content = $this->formatWithDumper($result->getGeocodedResult(), $format);
         } else {
-            $content = $this->formatWithSerializer($data, $format);
+            $content = $this->formatWithSerializer($result, $format);
         }
 
         return new Response($content, 200, array(
@@ -49,10 +50,10 @@ class ResponseListener
         return $this->dumpers[$format]->dump($result);
     }
 
-    protected function formatWithSerializer(array $data, $format)
+    protected function formatWithSerializer(ApiResult $result, $format)
     {
-        return $this->serializer->serialize(array_merge($data, array(
-            'result' => $data['result']->toArray(),
+        return $this->serializer->serialize(array_merge($result->getExtraData(), array(
+            'result' => $result->getGeocodedResult()->toArray(),
         )), $format);
     }
 
