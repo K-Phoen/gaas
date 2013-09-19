@@ -3,6 +3,8 @@
 namespace Geocoder\Controller;
 
 use Geocoder\Exception\ApiException;
+use Geocoder\Exception\InvalidCredentialsException;
+use Geocoder\Exception\NoResultException;
 use Geocoder\Request\Handler\GeocoderRequestHandler;
 use Geocoder\Result\ApiResult;
 use Silex\Application;
@@ -38,13 +40,27 @@ class ApiController implements ControllerProviderInterface
     {
         $handler = new GeocoderRequestHandler($app['geocoder']);
 
-        if (!$handler->handle($request)) {
+        try {
+            $result = $handler->handle($request);
+        } catch (InvalidCredentialsException $e) {
+            throw new ApiException(array(
+                'message'           => 'The given credentials were rejected by the provider',
+                'providerMessage'   => $e->getMessage(),
+            ), 403);
+        } catch (NoResultException $e) {
+            throw new ApiException(array(
+                'message'           => 'No result returned by the provider',
+                'providerMessage'   => $e->getMessage(),
+            ), 400);
+        }
+
+        if ($result === null) {
             throw new ApiException(array(
                 'message' => 'Invalid request',
             ), 400);
         }
 
         // and send the result
-        return new ApiResult($handler->getResult());
+        return new ApiResult($result);
     }
 }

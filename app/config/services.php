@@ -74,8 +74,6 @@ $app['geocoder.providers.factory'] = $app->share(function($app) {
     return $factory;
 });
 
-// known providers
-
 // we override geocoder's definition because we don't want to add providers yet
 if (isset($app['profiler'])) {
     $app['geocoder'] = $app->share(function($app) {
