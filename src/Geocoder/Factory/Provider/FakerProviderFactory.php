@@ -23,6 +23,7 @@ class FakerProviderFactory implements ProviderFactoryInterface
         }
 
         $class = $this->class;
+
         return new $class($this->faker);
     }
 }

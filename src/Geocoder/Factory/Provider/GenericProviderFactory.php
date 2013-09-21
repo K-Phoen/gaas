@@ -11,6 +11,7 @@ class GenericProviderFactory extends AbstractProviderFactory
         }
 
         $class = $this->class;
+
         return new $class($this->httpAdapter);
     }
 }

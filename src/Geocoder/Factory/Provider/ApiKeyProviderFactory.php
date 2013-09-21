@@ -11,6 +11,7 @@ class ApiKeyProviderFactory extends AbstractProviderFactory
         }
 
         $class = $this->class;
+
         return new $class($this->httpAdapter, $args['apiKey']);
     }
 }

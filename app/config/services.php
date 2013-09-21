@@ -88,5 +88,4 @@ if (isset($app['profiler'])) {
     });
 }
 
-
 return $app;

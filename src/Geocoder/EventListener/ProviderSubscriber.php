@@ -41,6 +41,7 @@ class ProviderSubscriber implements EventSubscriberInterface
             $providerObject = $this->providersFactory->getProvider($this->provider, $providerArgs);
         } catch (\InvalidArgumentException $e) {
             $event->setResponse(new Response($e->getMessage(), 406));
+
             return;
         }
 

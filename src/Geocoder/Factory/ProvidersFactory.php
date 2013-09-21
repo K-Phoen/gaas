@@ -30,6 +30,7 @@ class ProvidersFactory
         }
 
         $factory = $this->providersFactories[$name];
+
         return $factory->newInstance($providerArgs);
     }
 }

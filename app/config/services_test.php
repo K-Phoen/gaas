@@ -6,7 +6,6 @@
 
 $app->register(new \KPhoen\Provider\FakerServiceProvider('\Faker\Factory', false));
 
-
 /****************************
  * Geocoder related services
  ***************************/
